@@ -1,0 +1,12 @@
+.timeLine {
+	list-style: none;
+}
+
+.tweet {
+	margin: auto;
+	padding: 10px;
+	width: 500px;
+	height: 10%;
+	background-color: #fff; /* 背景色 */
+	border: 1px solid #ccc; /* 枠線 */
+}
