@@ -51,9 +51,10 @@ class Retrieve extends React.Component {
 						name="retrieve"
 						value={this.state.retrievedValue}
 						onChange={this.handleRetrieveChange}
-						className="retrieveButton"
+						className="retrieveForm"
 					/>
-					<input type="submit" value="検索" className="retrieve" />
+					<br />
+					<input type="submit" value="検索" className="retrieveButton" />
 				</form>
 
 				{flag[0] ? <p>ユーザー名:{this.state.show[1]}</p> : null}

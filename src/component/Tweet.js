@@ -50,14 +50,16 @@ class Tweet extends React.Component {
 						name="tweetPost"
 						value={this.state.tweetValue}
 						onChange={this.handleTweetChange}
-						className="tweetButton"
+						className="tweetForm"
 					/>
-					<input type="submit" value="つぶやく" className="tweetSubmit" />
+					<br />
+					<input type="submit" value="つぶやく" className="tweetButton" />
 				</form>
-				<p>注意:入力できるのは280字までです</p>
-				{this.state.count > 280 ? (
+				{this.state.count <= 280 ? (
+					<p>注意:入力できるのは280字までです</p>
+				) : (
 					<p className="alert">280字を超えています</p>
-				) : null}
+				)}
 				<div className="images">
 					<img src={techChan} alt="テックちゃん" className="techChan" />
 					<img src={techChan} alt="テックちゃん" className="techChan" />

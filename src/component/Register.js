@@ -54,7 +54,7 @@ class Register extends React.Component {
 							name="namePost"
 							value={this.state.nameValue}
 							onChange={this.handleNameChange}
-							className="nameButton"
+							className="nameForm"
 						/>
 					</div>
 					<br />
@@ -65,11 +65,11 @@ class Register extends React.Component {
 							name="introPost"
 							value={this.state.introValue}
 							onChange={this.handleIntroChange}
-							className="introButton"
+							className="introForm"
 						/>
 					</div>
 					<br />
-					<input type="submit" value="登録" className="registerSubmit" />
+					<input type="submit" value="登録" className="registerButton" />
 				</form>
 			</div>
 		)
