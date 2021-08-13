@@ -1,0 +1,17 @@
+.retComp {
+	padding: 20px;
+	height: 148px;
+	border-radius: 40px;
+	border: solid 4px aquamarine;
+	padding-top: auto;
+}
+
+.retrieveForm {
+	margin-top: 20px;
+}
+
+.idResult {
+	font-size: 10%;
+}
+.retrieveButton {
+}

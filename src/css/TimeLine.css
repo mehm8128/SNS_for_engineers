@@ -1,12 +1,19 @@
 .timeLine {
 	list-style: none;
+	margin: auto;
+	padding-right: 24px;
+	margin-top: 52px;
+	border: solid 40px aquamarine;
+	border-radius: 40px;
+	width: 40%;
 }
 
 .tweet {
 	margin: auto;
-	padding: 10px;
+	padding: 12px;
+	margin-top: 8px;
 	width: 500px;
 	height: 10%;
-	background-color: #fff; /* 背景色 */
-	border: 1px solid #ccc; /* 枠線 */
+	background-color: #fff;
+	border: 1px solid #ccc;
 }

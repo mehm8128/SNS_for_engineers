@@ -1,6 +1,7 @@
 import React from "react"
 import axios from "axios"
 import "../css/Tweet.css"
+import techChan from "../items/テックちゃん.png"
 
 class Tweet extends React.Component {
 	constructor(props) {
@@ -8,6 +9,7 @@ class Tweet extends React.Component {
 		this.state = {
 			tweetValue: "",
 			tweetId: "",
+			count: 0,
 		}
 
 		this.handleTweetChange = this.handleTweetChange.bind(this)
@@ -33,23 +35,36 @@ class Tweet extends React.Component {
 		this.setState({ tweetValue: "" })
 	}
 	handleTweetChange(e) {
-		this.setState({ tweetValue: e.target.value })
+		this.setState({
+			tweetValue: e.target.value,
+			count: e.target.value.length,
+		})
 	}
 	render() {
 		return (
-			<div>
+			<div className="tweComp">
 				<form onSubmit={this.handleTweetSubmit} className="tweetSubmitForm">
-					<label className="tweetLabel">
-						つぶやき:
-						<input
-							type="text"
-							name="tweetPost"
-							value={this.state.tweetValue}
-							onChange={this.handleTweetChange}
-						/>
-					</label>
+					<label className="tweetLabel">つぶやき: </label>
+					<input
+						type="text"
+						name="tweetPost"
+						value={this.state.tweetValue}
+						onChange={this.handleTweetChange}
+						className="tweetButton"
+					/>
 					<input type="submit" value="つぶやく" className="tweetSubmit" />
 				</form>
+				<p>注意:入力できるのは280字までです</p>
+				{this.state.count > 280 ? (
+					<p className="alert">280字を超えています</p>
+				) : null}
+				<div className="images">
+					<img src={techChan} alt="テックちゃん" className="techChan" />
+					<img src={techChan} alt="テックちゃん" className="techChan" />
+					<img src={techChan} alt="テックちゃん" className="techChan" />
+					<img src={techChan} alt="テックちゃん" className="techChan" />
+					<img src={techChan} alt="テックちゃん" className="techChan" />
+				</div>
 			</div>
 		)
 	}

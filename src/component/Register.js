@@ -42,35 +42,35 @@ class Register extends React.Component {
 	}
 	render() {
 		return (
-			<div>
+			<div className="regiComp">
 				<form
 					onSubmit={this.handleRegisterSubmit}
 					className="registerSubmitForm"
 				>
-					<label className="nameLabel">
-						名前:
+					<div className="nameRegi">
+						<label className="nameLabel">名前: </label>
 						<input
 							type="text"
 							name="namePost"
 							value={this.state.nameValue}
 							onChange={this.handleNameChange}
+							className="nameButton"
 						/>
-					</label>
+					</div>
 					<br />
-					<label className="introLavel">
-						自己紹介:
+					<div className="introRegi">
+						<label className="introLabel">自己紹介: </label>
 						<input
 							type="text"
 							name="introPost"
 							value={this.state.introValue}
 							onChange={this.handleIntroChange}
+							className="introButton"
 						/>
-					</label>
+					</div>
+					<br />
 					<input type="submit" value="登録" className="registerSubmit" />
 				</form>
-				{this.state.userId ? (
-					<p>あなたのIDは{this.state.userId}です。</p>
-				) : null}
 			</div>
 		)
 	}

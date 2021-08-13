@@ -10,6 +10,7 @@ class TimeLine extends React.Component {
 			usersId: [],
 			tweetedUsersId: [],
 			users: [],
+			date: [],
 			response: null,
 		}
 	}
@@ -39,6 +40,18 @@ class TimeLine extends React.Component {
 			this.setState({ usersId: list3 })
 			this.setState({ users: list4 })
 		})
+		axios
+			.get(
+				`https://versatileapi.herokuapp.com/api/text/all?$orderby=_created_at desc&$limit=20`
+			)
+			.then((res) => {
+				let list5 = this.state.date
+				const len = res.data.length
+				for (let i = 0; i < len; i++) {
+					list5 = list5.concat(res.data[i]._created_at)
+				}
+				this.setState({ date: list5 })
+			})
 	}
 	render() {
 		const tweets = this.state.tweets
@@ -47,16 +60,26 @@ class TimeLine extends React.Component {
 		const users = this.state.users
 		const timeline = tweets.map((tweet, index) => {
 			const name = users[usersId.indexOf(tweetedUsersId[index])]
+			const date = this.state.date[index]
 			return (
-				<div className="tweet">
-					{name ? <li>{name}</li> : <li>名無しさん</li>}
-					<li key={index} className="tweetContent">
+				<div className="tweet" key={index}>
+					{name ? (
+						<li className="name">{name}</li>
+					) : (
+						<li className="name">名無しさん</li>
+					)}
+					<li>{date}</li>
+					<li className="tweetContent">
 						<p>{tweet}</p>
 					</li>
 				</div>
 			)
 		})
-		return <ul className="timeLine">{timeline}</ul>
+		return (
+			<div className="tlComp">
+				<ul className="timeLine">{timeline}</ul>
+			</div>
+		)
 	}
 }
 export default TimeLine

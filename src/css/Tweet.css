@@ -1,0 +1,19 @@
+.tweComp {
+	padding: 20px;
+	border-radius: 40px;
+	height: 148px;
+	border: solid 4px aquamarine;
+	padding-top: auto;
+}
+.tweetSubmitForm {
+	margin-top: 20px;
+}
+.alert {
+	color: red;
+}
+.tweetButton {
+}
+
+.techChan {
+	width: 60px;
+}
