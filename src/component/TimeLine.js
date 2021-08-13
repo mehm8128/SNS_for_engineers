@@ -78,6 +78,11 @@ class TimeLine extends React.Component {
 		return (
 			<div className="tlComp">
 				<ul className="timeLine">{timeline}</ul>
+				<div className="c">
+					テックちゃんは東京工業大学のマスコットキャラクターです。
+					<br />
+					テックちゃんの著作権は工大祭実行委員会、及び原案者のヒダさんにあります。
+				</div>
 			</div>
 		)
 	}
