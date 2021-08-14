@@ -45,7 +45,7 @@ class Retrieve extends React.Component {
 		return (
 			<div className="retComp">
 				<form onSubmit={this.handleRetrieve} className="retrieveForm">
-					<label className="retrieveLabel">検索: </label>
+					<label className="retrieveLabel">ユーザー名検索: </label>
 					<input
 						type="text"
 						name="retrieve"
