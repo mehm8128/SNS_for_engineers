@@ -22,11 +22,13 @@ function Retrieve() {
 	const handleRetrieve = (e) => {
 		e.preventDefault()
 		const designatedUser = retrievedValue
+		console.log(userData[userList.indexOf(designatedUser)])
 		let show = [
 			userData[userList.indexOf(designatedUser)].name,
 			userData[userList.indexOf(designatedUser)].description,
 		]
 		setShow(show)
+		console.log(show)
 	}
 	const handleRetrieveChange = (e) => {
 		setRetrievedValue(e.target.value)
@@ -46,8 +48,8 @@ function Retrieve() {
 				<input type="submit" value="検索" className={styles.retrieveButton} />
 			</form>
 
-			{show[0] ? <p>ユーザー名:{show[1]}</p> : null}
-			{show[0] ? <p>自己紹介:{show[2]}</p> : null}
+			{show[0] ? <p>ユーザー名:{show[0]}</p> : null}
+			{show[0] ? <p>自己紹介:{show[1]}</p> : null}
 		</div>
 	)
 }
