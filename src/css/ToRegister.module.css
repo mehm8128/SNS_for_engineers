@@ -1,0 +1,15 @@
+.link {
+	text-align: right;
+	margin-right: 16px;
+	margin-top: 8px;
+}
+.linkContent {
+	text-decoration: none;
+	color: white;
+	background-color: rgb(79, 201, 160);
+	border-color: black;
+	border-radius: 8px;
+	padding: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+}

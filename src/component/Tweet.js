@@ -1,74 +1,62 @@
-import React from "react"
+import React, { useState } from "react"
 import axios from "axios"
-import "../css/Tweet.css"
+import styles from "../css/Tweet.module.css"
 import techChan from "../items/テックちゃん.png"
 
-class Tweet extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			tweetValue: "",
-			tweetId: "",
-			count: 0,
-		}
+function Tweet() {
+	const [tweetValue, setTweetValue] = useState("")
+	const [count, setCount] = useState(0)
 
-		this.handleTweetChange = this.handleTweetChange.bind(this)
-		this.handleTweetSubmit = this.handleTweetSubmit.bind(this)
-	}
-	handleTweetSubmit(e) {
+	const handleTweetSubmit = (e) => {
 		e.preventDefault()
-		if (this.state.tweetValue !== "") {
+		if (tweetValue !== "") {
 			const required = {
-				text: this.state.tweetValue,
+				text: tweetValue,
 			}
 			const config = {
 				headers: {
 					Authorization: "HelloWorld",
 				},
 			}
-			axios
-				.post(`https://versatileapi.herokuapp.com/api/text`, required, config)
-				.then((res) => {
-					this.setState({ tweetId: res.data.id })
-				})
+			axios.post(
+				`https://versatileapi.herokuapp.com/api/text`,
+				required,
+				config
+			)
 		}
-		this.setState({ tweetValue: "" })
+		setTweetValue("")
 	}
-	handleTweetChange(e) {
-		this.setState({
-			tweetValue: e.target.value,
-			count: e.target.value.length,
-		})
+	const handleTweetChange = (e) => {
+		setTweetValue(e.target.value)
+		setCount(e.target.value.length)
 	}
-	render() {
-		return (
-			<div className="tweComp">
-				<form onSubmit={this.handleTweetSubmit} className="tweetSubmitForm">
-					<label className="tweetLabel">つぶやき: </label>
-					<input
-						type="text"
-						name="tweetPost"
-						value={this.state.tweetValue}
-						onChange={this.handleTweetChange}
-						className="tweetForm"
-					/>
-					<br />
-					<input type="submit" value="つぶやく" className="tweetButton" />
-				</form>
-				{this.state.count <= 280 ? (
-					<p>注意:入力できるのは280字までです</p>
-				) : (
-					<p className="alert">280字を超えています</p>
-				)}
-				<div className="images">
-					<img src={techChan} alt="テックちゃん" className="techChan" />
-					<img src={techChan} alt="テックちゃん" className="techChan" />
-					<img src={techChan} alt="テックちゃん" className="techChan" />
-					<img src={techChan} alt="テックちゃん" className="techChan" />
-					<img src={techChan} alt="テックちゃん" className="techChan" />
-				</div>
+	return (
+		<div className={styles.tweComp}>
+			<form onSubmit={handleTweetSubmit} className={styles.tweetSubmitForm}>
+				<label className={styles.tweetLabel}>つぶやき: </label>
+				<input
+					type="text"
+					name="tweetPost"
+					value={tweetValue}
+					onChange={handleTweetChange}
+					className={styles.tweetForm}
+				/>
+				<br />
+				<input type="submit" value="つぶやく" className={styles.tweetButton} />
+			</form>
+			{count <= 280 ? (
+				<p>注意: 入力できるのは280字までです</p>
+			) : (
+				<p className={styles.alert}>280字を超えています</p>
+			)}
+			<div className={styles.images}>
+				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
+				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
+				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
+				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
+				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
 			</div>
-		)
-	}
+		</div>
+	)
 }
 export default Tweet

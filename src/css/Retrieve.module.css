@@ -1,4 +1,4 @@
-.regiComp {
+.retComp {
 	padding: 20px;
 	border-radius: 40px;
 	height: 200px;
@@ -6,27 +6,24 @@
 	border: solid 4px rgb(79, 201, 160);
 	padding-top: auto;
 }
-.registerSubmitForm {
+
+.retrieveForm {
 	margin-top: 20px;
 }
-.nameRegi {
-	display: block;
-	margin-right: 40px;
-	text-align: right;
+
+.idResult {
+	font-size: 10%;
 }
-.introRegi {
-	display: block;
-	margin-right: 40px;
-	text-align: right;
-}
-.registerButton {
+.retrieveButton {
 	background-color: rgb(79, 201, 160);
 	color: white;
 	width: 100px;
-	height: 32px;
-	border-radius: 10px;
+	height: 28px;
+	border-radius: 12px;
 	display: block;
-	margin: auto;
+	margin-top: 12px;
+	margin-right: auto;
+	margin-left: auto;
 	outline: none;
 	border: none;
 	cursor: pointer;

@@ -1,67 +1,55 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
-import "../css/Retrieve.css"
+import styles from "../css/Retrieve.module.css"
 
-class Retrieve extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			retrievedValue: "",
-			userList: [],
-			userData: [],
-			show: [],
-		}
-		this.handleRetrieveChange = this.handleRetrieveChange.bind(this)
-		this.handleRetrieve = this.handleRetrieve.bind(this)
-	}
-	componentDidMount() {
+function Retrieve() {
+	const [retrievedValue, setRetrievedValue] = useState("")
+	const [userList, setUserList] = useState([])
+	const [userData, setUserData] = useState([])
+	const [show, setShow] = useState([])
+
+	useEffect(() => {
 		axios.get(`https://versatileapi.herokuapp.com/api/user/all`).then((res) => {
-			let userList = this.state.userList
 			const len = res.data.length
+			let userListCopy = userList
 			for (let i = 0; i < len; i++) {
-				userList = userList.concat(res.data[i].name)
+				userListCopy = userListCopy.concat(res.data[i].name)
 			}
-			this.setState({ userList: userList })
-			this.setState({ userData: res.data })
+			setUserList(userListCopy)
+			setUserData(res.data)
 		})
-	}
-	handleRetrieve(e) {
+	}, [])
+	const handleRetrieve = (e) => {
 		e.preventDefault()
-		const designatedUser = this.state.retrievedValue
-		const userData = this.state.userData
-		const userList = this.state.userList
+		const designatedUser = retrievedValue
 		let show = [
-			userData[userList.indexOf(designatedUser)].id,
 			userData[userList.indexOf(designatedUser)].name,
 			userData[userList.indexOf(designatedUser)].description,
 		]
-		this.setState({ show: show })
+		setShow(show)
 	}
-	handleRetrieveChange(e) {
-		this.setState({ retrievedValue: e.target.value })
+	const handleRetrieveChange = (e) => {
+		setRetrievedValue(e.target.value)
 	}
-	render() {
-		const flag = this.state.show
-		return (
-			<div className="retComp">
-				<form onSubmit={this.handleRetrieve} className="retrieveForm">
-					<label className="retrieveLabel">ユーザー名検索: </label>
-					<input
-						type="text"
-						name="retrieve"
-						value={this.state.retrievedValue}
-						onChange={this.handleRetrieveChange}
-						className="retrieveForm"
-					/>
-					<br />
-					<input type="submit" value="検索" className="retrieveButton" />
-				</form>
+	return (
+		<div className={styles.retComp}>
+			<form onSubmit={handleRetrieve} className={styles.retrieveForm}>
+				<label className={styles.retrieveLabel}>ユーザー名検索: </label>
+				<input
+					type="text"
+					name="retrieve"
+					value={retrievedValue}
+					onChange={handleRetrieveChange}
+					className={styles.retrieveForm}
+				/>
+				<br />
+				<input type="submit" value="検索" className={styles.retrieveButton} />
+			</form>
 
-				{flag[0] ? <p>ユーザー名:{this.state.show[1]}</p> : null}
-				{flag[0] ? <p>自己紹介:{this.state.show[2]}</p> : null}
-			</div>
-		)
-	}
+			{show[0] ? <p>ユーザー名:{show[1]}</p> : null}
+			{show[0] ? <p>自己紹介:{show[2]}</p> : null}
+		</div>
+	)
 }
 
 export default Retrieve

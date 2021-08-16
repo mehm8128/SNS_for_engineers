@@ -1,0 +1,51 @@
+.regiComp {
+	padding: 20px;
+	border-radius: 40px;
+	height: 200px;
+	width: 300px;
+	border: solid 4px rgb(79, 201, 160);
+	padding-top: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.registerSubmitForm {
+	margin-top: 20px;
+}
+.nameRegi {
+	display: block;
+	margin-right: 40px;
+	text-align: right;
+}
+.introRegi {
+	display: block;
+	margin-right: 40px;
+	text-align: right;
+}
+.registerButton {
+	background-color: rgb(79, 201, 160);
+	color: white;
+	width: 100px;
+	height: 32px;
+	border-radius: 12px;
+	display: block;
+	margin: auto;
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+
+.link {
+	text-align: right;
+	margin-right: 16px;
+	margin-top: 8px;
+}
+.linkContent {
+	text-decoration: none;
+	color: white;
+	background-color: rgb(79, 201, 160);
+	border-color: black;
+	border-radius: 8px;
+	padding: 4px;
+	padding-left: 8px;
+	padding-right: 8px;
+}

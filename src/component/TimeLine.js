@@ -1,90 +1,70 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
-import "../css/TimeLine.css"
+import styles from "../css/TimeLine.module.css"
 
-class TimeLine extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			tweets: [],
-			usersId: [],
-			tweetedUsersId: [],
-			users: [],
-			date: [],
-			response: null,
-		}
-	}
-	componentDidMount() {
+function TimeLine() {
+	const [tweets, setTweets] = useState([])
+	const [usersId, setUsersId] = useState([])
+	const [tweetedUsersId, setTweetedUsersId] = useState([])
+	const [users, setUsers] = useState([])
+	const [date, setDate] = useState([])
+	useEffect(() => {
 		axios
 			.get(
 				`https://versatileapi.herokuapp.com/api/text/all?$orderby=_created_at desc&$limit=20`
 			)
 			.then((res) => {
-				let list = this.state.tweets
-				let list2 = this.state.tweetedUsersId
+				console.log(tweets.concat(res.data))
+				let tweetsCopy = tweets
+				let tweetedUsersIdCopy = tweetedUsersId
+				let dateCopy = date
 				for (let i = 0; i < 20; i++) {
-					list = list.concat(res.data[i].text)
-					list2 = list2.concat(res.data[i]._user_id)
+					tweetsCopy = tweetsCopy.concat(res.data[i].text)
+					tweetedUsersIdCopy = tweetedUsersIdCopy.concat(res.data[i]._user_id)
+					dateCopy = dateCopy.concat(res.data[i]._created_at)
 				}
-				this.setState({ tweets: list })
-				this.setState({ tweetedUsersId: list2 })
+				setTweets(tweetsCopy)
+				setTweetedUsersId(tweetedUsersIdCopy)
+				setDate(dateCopy)
 			})
 		axios.get(`https://versatileapi.herokuapp.com/api/user/all`).then((res) => {
-			let list3 = this.state.usersId
-			let list4 = this.state.users
 			const len = res.data.length
+			let usersIdCopy = usersId
+			let usersCopy = users
 			for (let i = 0; i < len; i++) {
-				list3 = list3.concat(res.data[i]._user_id)
-				list4 = list4.concat(res.data[i].name)
+				usersIdCopy = usersIdCopy.concat(res.data[i]._user_id)
+				usersCopy = usersCopy.concat(res.data[i].name)
 			}
-			this.setState({ usersId: list3 })
-			this.setState({ users: list4 })
+			setUsersId(usersIdCopy)
+			setUsers(users)
 		})
-		axios
-			.get(
-				`https://versatileapi.herokuapp.com/api/text/all?$orderby=_created_at desc&$limit=20`
-			)
-			.then((res) => {
-				let list5 = this.state.date
-				const len = res.data.length
-				for (let i = 0; i < len; i++) {
-					list5 = list5.concat(res.data[i]._created_at)
-				}
-				this.setState({ date: list5 })
-			})
-	}
-	render() {
-		const tweets = this.state.tweets
-		const usersId = this.state.usersId
-		const tweetedUsersId = this.state.tweetedUsersId
-		const users = this.state.users
-		const timeline = tweets.map((tweet, index) => {
-			const name = users[usersId.indexOf(tweetedUsersId[index])]
-			const date = this.state.date[index]
-			return (
-				<div className="tweet" key={index}>
-					{name ? (
-						<li className="name">{name}</li>
-					) : (
-						<li className="name">名無しさん</li>
-					)}
-					<li>{date}</li>
-					<li className="tweetContent">
-						<p>{tweet}</p>
-					</li>
-				</div>
-			)
-		})
+		console.log("axiosed")
+	}, [])
+	const timeline = tweets.map((tweet, index) => {
+		const name = users[usersId.indexOf(tweetedUsersId[index])]
 		return (
-			<div className="tlComp">
-				<ul className="timeLine">{timeline}</ul>
-				<div className="c">
-					テックちゃんは東京工業大学のマスコットキャラクターです。
-					<br />
-					テックちゃんの著作権は工大祭実行委員会、及び原案者のヒダさんにあります。
-				</div>
+			<div className={styles.tweet} key={index}>
+				{name ? (
+					<li className={styles.name}>{name}</li>
+				) : (
+					<li className={styles.name}>名無しさん</li>
+				)}
+				<li>{date[index]}</li>
+				<li className={styles.tweetContent}>
+					<p>{tweet}</p>
+				</li>
 			</div>
 		)
-	}
+	}, [])
+	return (
+		<div className={styles.tlComp}>
+			<ul className={styles.timeLine}>{timeline}</ul>
+			<div className={styles.c}>
+				テックちゃんは東京工業大学のマスコットキャラクターです。
+				<br />
+				テックちゃんの著作権は工大祭実行委員会、及び原案者のヒダさんにあります。
+			</div>
+		</div>
+	)
 }
 export default TimeLine
