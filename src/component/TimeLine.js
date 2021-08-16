@@ -14,7 +14,6 @@ function TimeLine() {
 				`https://versatileapi.herokuapp.com/api/text/all?$orderby=_created_at desc&$limit=20`
 			)
 			.then((res) => {
-				console.log(tweets.concat(res.data))
 				let tweetsCopy = tweets
 				let tweetedUsersIdCopy = tweetedUsersId
 				let dateCopy = date
@@ -39,7 +38,7 @@ function TimeLine() {
 			setUsers(users)
 		})
 		console.log("axiosed")
-	}, [])
+	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 	const timeline = tweets.map((tweet, index) => {
 		const name = users[usersId.indexOf(tweetedUsersId[index])]
 		return (
@@ -55,7 +54,7 @@ function TimeLine() {
 				</li>
 			</div>
 		)
-	}, [])
+	})
 	return (
 		<div className={styles.tlComp}>
 			<ul className={styles.timeLine}>{timeline}</ul>

@@ -18,7 +18,7 @@ function Retrieve() {
 			setUserList(userListCopy)
 			setUserData(res.data)
 		})
-	}, [])
+	}, []) // eslint-disable-line react-hooks/exhaustive-deps
 	const handleRetrieve = (e) => {
 		e.preventDefault()
 		const designatedUser = retrievedValue
