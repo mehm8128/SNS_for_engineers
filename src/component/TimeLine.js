@@ -17,10 +17,24 @@ function TimeLine() {
 				let tweetsCopy = tweets
 				let tweetedUsersIdCopy = tweetedUsersId
 				let dateCopy = date
-				for (let i = 0; i < 20; i++) {
+				const len = res.data.length
+				for (let i = 0; i < len; i++) {
 					tweetsCopy = tweetsCopy.concat(res.data[i].text)
 					tweetedUsersIdCopy = tweetedUsersIdCopy.concat(res.data[i]._user_id)
 					dateCopy = dateCopy.concat(res.data[i]._created_at)
+				}
+				for (let i = 0; i < len; i++) {
+					let dateCopy1 = dateCopy[i].split("T")[0]
+					let dateCopy2 = dateCopy[i].split("T")[1]
+					dateCopy1 = dateCopy1.replace("-", "年")
+					dateCopy1 = dateCopy1.replace("-", "月")
+					dateCopy1 = dateCopy1 + "日"
+					let hour = Number(dateCopy2.slice(0, 2)) + 9
+					dateCopy2 = String(hour) + dateCopy2.slice(2)
+					dateCopy2 = dateCopy2.replace(":", "時")
+					dateCopy2 = dateCopy2.replace(":", "分")
+					dateCopy2 = dateCopy2.split(".")[0] + "秒"
+					dateCopy[i] = dateCopy1 + dateCopy2
 				}
 				setTweets(tweetsCopy)
 				setTweetedUsersId(tweetedUsersIdCopy)
@@ -48,13 +62,14 @@ function TimeLine() {
 				) : (
 					<li className={styles.name}>名無しさん</li>
 				)}
-				<li>{date[index]}</li>
 				<li className={styles.tweetContent}>
 					<p>{tweet}</p>
 				</li>
+				<li className={styles.date}>{date[index]}</li>
 			</div>
 		)
 	})
+
 	return (
 		<div className={styles.tlComp}>
 			<ul className={styles.timeLine}>{timeline}</ul>

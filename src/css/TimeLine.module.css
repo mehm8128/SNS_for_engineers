@@ -22,3 +22,8 @@
 .c {
 	font-size: 5%;
 }
+
+.date {
+	text-align: right;
+	color: #ccc;
+}

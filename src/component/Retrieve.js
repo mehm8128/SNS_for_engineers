@@ -22,13 +22,11 @@ function Retrieve() {
 	const handleRetrieve = (e) => {
 		e.preventDefault()
 		const designatedUser = retrievedValue
-		console.log(userData[userList.indexOf(designatedUser)])
 		let show = [
 			userData[userList.indexOf(designatedUser)].name,
 			userData[userList.indexOf(designatedUser)].description,
 		]
 		setShow(show)
-		console.log(show)
 	}
 	const handleRetrieveChange = (e) => {
 		setRetrievedValue(e.target.value)

@@ -65,8 +65,18 @@ function Register() {
 					<input type="submit" value="登録" className={styles.registerButton} />
 				</form>
 			</div>
-			<br />
-			注意: ユーザー名は30字まで、自己紹介は300字までです
+			<div className={styles.alert}>
+				{nameValue.length <= 30 ? (
+					<p className={styles.name}>注意1: ユーザー名は30字までです</p>
+				) : (
+					<p className={styles.nameAlert}>ユーザー名が30字を超えています</p>
+				)}
+				{introValue.length <= 300 ? (
+					<p className={styles.intro}>注意2: 自己紹介は300字までです</p>
+				) : (
+					<p className={styles.introAlert}>自己紹介が300字を超えています</p>
+				)}
+			</div>
 		</div>
 	)
 }
