@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
 import styles from "../css/Tweet.module.css"
-import techChan from "../items/テックちゃん.png"
 
 function Tweet() {
 	const [tweetValue, setTweetValue] = useState("")
@@ -49,13 +48,6 @@ function Tweet() {
 			) : (
 				<p className={styles.alert}>280字を超えています</p>
 			)}
-			<div className={styles.images}>
-				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
-				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
-				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
-				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
-				<img src={techChan} alt="テックちゃん" className={styles.techChan} />
-			</div>
 		</div>
 	)
 }
