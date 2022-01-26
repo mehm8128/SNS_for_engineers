@@ -6,7 +6,6 @@ import Retrieve from "./component/Retrieve"
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import ToRegister from "./component/ToRegister"
 
-//Switchの直下はRouteかRedirectのみ
 function App() {
 	return (
 		<BrowserRouter>
